@@ -1,0 +1,5 @@
+<resources>
+
+    <dimen name="textview_width">320dp</dimen>
+
+</resources>

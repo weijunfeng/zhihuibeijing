@@ -1,0 +1,41 @@
+package com.itheima.zhbj52.utils.bitmap;
+
+import android.graphics.Bitmap;
+import android.widget.ImageView;
+
+import com.itheima.zhbj52.R;
+
+/**
+ * 自定义图片加载工具
+ * 
+ * @author Kevin
+ * 
+ */
+public class MyBitmapUtils {
+
+	NetCacheUtils mNetCacheUtils;
+	LocalCacheUtils mLocalCacheUtils;
+
+	public MyBitmapUtils() {
+		mLocalCacheUtils = new LocalCacheUtils();
+		mNetCacheUtils = new NetCacheUtils(mLocalCacheUtils);
+	}
+
+	public void display(ImageView ivPic, String url) {
+		ivPic.setImageResource(R.drawable.news_pic_default);// 设置默认加载图片
+
+		// 从内存读
+
+		// 从本地读
+		Bitmap bitmap = mLocalCacheUtils.getBitmapFromLocal(url);
+		if (bitmap != null) {
+			ivPic.setImageBitmap(bitmap);
+			System.out.println("从本地读取图片啦...");
+			return;
+		}
+
+		// 从网络读
+		mNetCacheUtils.getBitmapFromNet(ivPic, url);
+	}
+
+}
